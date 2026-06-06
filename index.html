@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>IDE Browser Hub + Games</title>
+  <style>
+    body { margin: 0; font-family: Arial; display: flex; }
+    #sidebar {
+      width: 70px;
+      background: #111;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 10px;
+    }
+    #sidebar button {
+      background: none;
+      border: none;
+      color: #ccc;
+      margin: 10px 0;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    #sidebar button:hover { color: #fff; }
+    #main { flex: 1; display: flex; flex-direction: column; }
+    #toolbar { background: #222; padding: 10px; display: flex; gap: 10px; }
+    #toolbar button { padding: 6px 12px; cursor: pointer; }
+    #speedControl { margin-left: auto; color: #fff; }
+    iframe { flex: 1; border: none; transition: opacity 0.5s ease; }
+  </style>
+</head>
+<body>
+  <!-- Бічне меню -->
+  <div id="sidebar">
+    <button onclick="openBrowser('https://www.opera.com')">Opera</button>
+    <button onclick="openBrowser('https://www.opera.com/gx')">GX</button>
+    <button onclick="openBrowser('https://www.google.com')">Google</button>
+    <button onclick="openBrowser('https://www.youtube.com')">YouTube</button>
+    <button onclick="openBrowser('https://discord.com')">Discord</button>
+    <button onclick="openBrowser('https://spotify.com')">Spotify</button>
+    <!-- Ігри -->
+    <button onclick="openBrowser('https://eaglecraft.com')">Eaglercraft</button>
+    <button onclick="openBrowser('https://www.gamenora.com')">Gamenora</button>
+  </div>
+
+  <!-- Основна частина -->
+  <div id="main">
+    <div id="toolbar">
+      <button onclick="openBrowser('https://www.mozilla.org/firefox')">Firefox</button>
+      <button onclick="openBrowser('https://www.microsoft.com/edge')">Edge</button>
+      <button onclick="openBrowser('https://brave.com')">Brave</button>
+      <button onclick="openBrowser('https://vivaldi.com')">Vivaldi</button>
+      <button onclick="openBrowser('https://browser.yandex.com')">Яндекс</button>
+
+      <!-- Регулятор швидкості -->
+      <div id="speedControl">
+        Швидкість:
+        <select onchange="setSpeed(this.value)">
+          <option value="eco">Економний</option>
+          <option value="balance" selected>Баланс</option>
+          <option value="turbo">Турбо</option>
+        </select>
+      </div>
+    </div>
+    <iframe id="browser" src="https://www.opera.com"></iframe>
+  </div>
+
+  <script>
+    function openBrowser(url) {
+      document.getElementById("browser").src = url;
+    }
+    function setSpeed(mode) {
+      let iframe = document.getElementById("browser");
+      if (mode === "eco") {
+        iframe.style.opacity = "0.6";
+      } else if (mode === "balance") {
+        iframe.style.opacity = "1";
+        iframe.style.transition = "opacity 0.5s ease";
+      } else if (mode === "turbo") {
+        iframe.style.opacity = "1";
+        iframe.style.transition = "opacity 0.2s ease";
+      }
+    }
+  </script>
+</body>
+</html>
